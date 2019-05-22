@@ -25,22 +25,26 @@ case (let name, let animal, let age):
 //: Then below, write out what the meaning of the switch condition is.
 
 // case (let name, let animal, let age) where (age < 1 || name.count < 1 || animal.count < 1):
-// Explain what this does.
+// get the value of name, animal and age when the condition for each element is satisfied
 
 // case ("Billy", "Dog", let age):
-// Explain what this does.
+// get the value of age when the name = Bill, and the animal = dog
 
 // case ("Tim", "Dog", let age) where age == 2:
 // Explain what this does.
+// get the age when the name = Tim, animal = dog and age = 2
 
 // case (let name, let animal, ..<3):
 // Explain what this does.
+//gete the name, animal when the age is less than 3
 
 // case (let name, let animal, 7...):
 // Explain what this does.
+//get the name, animal, when the age is greater or equal than 7
 
 // case (let name, let animal, let age):
 // Explain what this does.
+//get the name, animal and age
 
 
 /*:
@@ -66,7 +70,37 @@ let stringArray = [String]()
 
 //: Now it's your turn. Create an extension on the 'Queue' data structure you created earlier.
 //: For elements that conforms to the 'Numeric' protocol, create a function that adds all numbers together in the queue and print out its total.
+struct Queue<T> {
+    var list : Array<T> = []
+    func isEmpty() -> Bool {
+        return list.isEmpty
+    }
 
+    mutating func enqueue(_ item: T) {
+        list.append(item)
+    }
+
+    mutating func dequeue () -> T? {
+        if(!isEmpty()) {
+            return list.removeFirst()
+        }
+        return nil
+    }
+
+    mutating func show() -> Array<T> {
+        return list
+    }
+
+}
+
+//extension Queue where T: Numeric {
+//    mutating func sum<T: Numeric > () -> T{
+//        var s: T = 0
+//        for i in list {
+//            s += i
+//        }
+//    }
+//}
 
 
 /*:
@@ -99,6 +133,13 @@ let dictionary: Dictionary? = ["Sentence 1" : "Let me help you with your baggage
                                "Sentence 2" : "I'd rather have a burger",
                                "Sentence 3" : "I think I will buy the red car"]
 
+if let number = dictionary?.count {
+    if (number > 0) {
+        for  (_, value )  in dictionary! {
+            print(value.count)
+        }
 
+    }
 
+}
 //: [Next](@next)

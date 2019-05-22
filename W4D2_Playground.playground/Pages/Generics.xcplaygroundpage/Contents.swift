@@ -33,7 +33,12 @@ printMyTwoNumbers(num1: "three", num2: "four")
  - Experiment:
  Now you try! Write a generic function that takes in two parameters and multiply their value together and print the result. (Hint: You might run into an error after finishing. Continue to the next experiment to find out why!)
  */
+func multiplyMyTwoNumbersInt(num1: Int, num2: Int){
 
+    print("\(num1 * num2)")
+}
+multiplyMyTwoNumbersInt(num1: 2, num2: 3)
+//multiplyMyTwoNumbersInt(num1: 2.0, num2: 3.0)
 
 /*:
  - Experiment:
@@ -41,15 +46,19 @@ printMyTwoNumbers(num1: "three", num2: "four")
  */
 
 func multiply<Element: Numeric>(num1: Element, num2: Element) {
-  
+  print("\(num1 * num2)")
 }
+
+multiply(num1: 2, num2: 3)
+multiply(num1: 2.0, num2: 3.0)
+multiply(num1: 2.0, num2: 3)
 
 
 /*:
  - Experiment:
  Update your multiplication function and test it! Try using different variable types to see what works and what doesn't.
  */
-
+multiply(num1: 2.0, num2: 3)
 
 /*:
  - Experiment:
@@ -59,9 +68,14 @@ func multiply<Element: Numeric>(num1: Element, num2: Element) {
  - Note:
  For this experiment, refrain from using the array method `indexOf`. Also the protocol `Equatable` might be useful here. Search it up to see what it's about.
  */
+func findNumber<T: Equatable>(array: [T], number: T) -> T {
+    if let index = array.firstIndex(of: number) as? T{
+        return index
+    }
+    return -1 as! T
+}
 
-
-
+findNumber(array: [1,5,2,4], number: 5)
 /*:
  - Callout(Challenge):
  During class you saw a simple implementation of a stack where data is inserted (pushed) to the top of the stack when data is added. When data is removed (pop) from the stack, it removes the first item at the top of the stack. We will now implement a similar data structure called a "queue" as a generic.
@@ -74,8 +88,38 @@ func multiply<Element: Numeric>(num1: Element, num2: Element) {
  - enqueue: add an item to the queue
  - dequeue: remove an item from the queue, and return the removed element
  */
+struct Queue<T> {
+    var list : Array<T> = []
+    func isEmpty() -> Bool {
+        return list.isEmpty
+    }
 
+    mutating func enqueue(_ item: T) {
+        list.append(item)
+    }
 
+    mutating func dequeue () -> T? {
+        if(!isEmpty()) {
+            return list.removeFirst()
+        }
+        return nil
+    }
 
+    mutating func show() -> Array<T> {
+        return list
+    }
+
+}
+
+var queue : Queue<String> = Queue<String>.init()
+queue.show()
+queue.enqueue("a")
+queue.show()
+queue.enqueue("b")
+queue.show()
+queue.enqueue("c")
+queue.show()
+queue.dequeue()
+queue.show()
 //: [Next](@next)
 
